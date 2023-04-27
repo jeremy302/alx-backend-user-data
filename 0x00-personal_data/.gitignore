@@ -1,0 +1,15 @@
+~*~
+*~
+~*
+#*#
+*.pyc
+*.txt
+*.org
+*.out
+test*
+*test
+TAGS
+tags
+test*/
+*test/
+node_modules/
