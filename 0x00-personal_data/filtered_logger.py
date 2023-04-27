@@ -6,6 +6,7 @@ import csv
 import os
 import mysql.connector
 from mysql.connector import MySQLConnection
+import re
 
 
 dbuser = os.environ.get('PERSONAL_DATA_DB_USERNAME', 'root')
@@ -22,6 +23,12 @@ PII_FIELDS = ['name', 'email', 'phone', 'ssn', 'password']
 def filter_datum(fields: List[str], redaction: str, message: str,
                  separator: str) -> str:
     ''' filter datum '''
+    msg = message
+    for field in fields:
+        msg = re.sub(r'\b{}=[^{}]*'.format(field, separator),
+                     r'{}={}'.format(field, redaction),
+                     msg)
+    return msg
     pairs = [s.split('=') for s in message.split(separator)]
     msgs = []
     for p in pairs:
