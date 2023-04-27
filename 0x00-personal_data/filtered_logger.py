@@ -29,16 +29,16 @@ def filter_datum(fields: List[str], redaction: str, message: str,
                      r'{}={}'.format(field, redaction),
                      msg)
     return msg
-    pairs = [s.split('=') for s in message.split(separator)]
-    msgs = []
-    for p in pairs:
-        if len(p) == 1:
-            msgs.append(p[0])
-        elif p[0].split(' ')[-1] in fields:
-            msgs.append(p[0] + '=' + redaction)
-        else:
-            msgs.append(p[0] + '=' + p[1])
-    return separator.join(msgs)
+    # pairs = [s.split('=') for s in message.split(separator)]
+    # msgs = []
+    # for p in pairs:
+    #     if len(p) == 1:
+    #         msgs.append(p[0])
+    #     elif p[0].split(' ')[-1] in fields:
+    #         msgs.append(p[0] + '=' + redaction)
+    #     else:
+    #         msgs.append(p[0] + '=' + p[1])
+    # return separator.join(msgs)
 
 
 def get_logger() -> logging.Logger:
@@ -69,7 +69,7 @@ class RedactingFormatter(logging.Formatter):
     FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
     SEPARATOR = ";"
 
-    def __init__(self, fields) -> None:
+    def __init__(self, fields: List[str]):
         ''' class constructor '''
         super(RedactingFormatter, self).__init__(self.FORMAT)
         self.fields = fields
