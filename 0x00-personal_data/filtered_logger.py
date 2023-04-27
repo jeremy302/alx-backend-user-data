@@ -14,7 +14,7 @@ dbpasswd = os.environ.get('PERSONAL_DATA_DB_PASSWORD', '')
 dbhost = os.environ.get('PERSONAL_DATA_DB_HOST', 'localhost')
 dbname = os.environ.get('PERSONAL_DATA_DB_NAME', '')
 
-PII_FIELDS = ['name', 'email', 'phone', 'ssn', 'password']
+PII_FIELDS = ('name', 'email', 'phone', 'ssn', 'password')
 # with open('user_data.csv') as file:
 #     headers = next(csv.reader(file))
 #     PII_FIELDS = headers
