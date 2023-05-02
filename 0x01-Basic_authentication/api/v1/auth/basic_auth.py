@@ -11,8 +11,8 @@ class BasicAuth(Auth):
     def extract_base64_authorization_header(self,
                                             authorization_header: str) -> str:
         ''' extract base64 authorization header '''
-        if (authorization_header is None or
-            (type(authorization_header) is not str) or (
+        if (authorization_header is None or (
+                type(authorization_header) is not str) or (
                 not authorization_header.startswith('Basic '))):
             return None
         else:
@@ -42,8 +42,8 @@ class BasicAuth(Auth):
     def user_object_from_credentials(
             self, user_email: str, user_pwd: str) -> TypeVar('User'):
         ''' user object from credentials '''
-        if (user_email is None or type(user_email) is not str or
-            user_pwd is None or type(user_pwd) is not str):
+        if (user_email is None or type(user_email) is not str) or (
+                user_pwd is None or type(user_pwd) is not str):
             return None
         users = User.search({'email': user_email})
         if not users:
