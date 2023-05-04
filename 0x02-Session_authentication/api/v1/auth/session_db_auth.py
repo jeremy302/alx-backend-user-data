@@ -34,14 +34,19 @@ class SessionDBAuth(SessionExpAuth):
             return session.user_id
 
     def destroy_session(self, request=None) -> bool:
-        """Destroys an authenticated session.
-        """
-        session_id = self.session_cookie(request)
+        ''' destroys a session (logout) '''
+        if request is None:
+            return False
+        sess_id = self.session_cookie(request)
+        if not sess_id:
+            return False
+        sessions = None
         try:
             sessions = UserSession.search({'session_id': session_id})
-        except Exception:
+        except Exception as err:
             return False
-        if len(sessions) <= 0:
+        if not sessions:
             return False
-        sessions[0].remove()
+        session = sessions[0]
+        session.remove()
         return True
