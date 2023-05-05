@@ -42,7 +42,7 @@ class SessionDBAuth(SessionExpAuth):
             return False
         sessions = None
         try:
-            sessions = UserSession.search({'session_id': session_id})
+            sessions = UserSession.search({'session_id': sess_id})
         except Exception as err:
             return False
         if not sessions:
