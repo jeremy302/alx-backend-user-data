@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 ''' auth module '''
+from typing import Union
 import uuid
 
 import bcrypt
@@ -11,7 +12,7 @@ from user import User
 
 def _hash_password(password: str) -> bytes:
     ''' hashes a password '''
-    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
 
 
 def _generate_uuid() -> str:
