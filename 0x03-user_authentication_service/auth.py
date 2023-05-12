@@ -11,7 +11,7 @@ from user import User
 
 def _hash_password(password: str) -> bytes:
     ''' hashes a password '''
-    return bcrypt.hashpw(password.encode(), bcrypt.gensalt())
+    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
 
 
 def _generate_uuid() -> str:
