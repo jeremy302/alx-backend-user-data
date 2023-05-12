@@ -55,7 +55,7 @@ def logout() -> str:
 def profile() -> str:
     ''' /profile route handler '''
     sess_id = request.cookies.get("session_id")
-    user = AUTH.get_user_from_session_id(sessn_id)
+    user = AUTH.get_user_from_session_id(sess_id)
     if user:
         return jsonify({"email": user.email})
     abort(403)
