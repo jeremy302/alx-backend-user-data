@@ -49,9 +49,16 @@ class DB:
     def update_user(self, user_id, **kwargs):
         ''' updates a user '''
         user = self.find_user_by(id=user_id)
-        for k in kwargs:
-            if hasattr(user, k):
-                setattr(user, k, kwargs[k])
+        if user is None:
+            return
+        update_source = {}
+        for key, value in kwargs.items():
+            if hasattr(User, key):
+                update_source[getattr(User, key)] = value
             else:
                 raise ValueError()
+        self._session.query(User).filter(User.id == user_id).update(
+            update_source,
+            synchronize_session=False,
+        )
         self._session.commit()
